@@ -31,7 +31,7 @@ export const getCustomer = (id, token) => {
 
 export const getOrder = (id, token) => {
     return {
-        type: 'GET_ORDERS',
+        type: 'GET_CHECKIN',
         payload: axios({
             method: 'GET',
             headers: {

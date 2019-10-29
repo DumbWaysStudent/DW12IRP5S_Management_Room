@@ -1,5 +1,5 @@
 const initialState = {
-    checkin: [],
+    order: [],
     error: null,
     isLoading: true,
 }
@@ -14,7 +14,7 @@ const order = (state = initialState, action) => {
         case `GET_CHECKIN_FULFILLED`:
             return {
                 ...state,
-                checkin: action.payload.data,
+                order: action.payload.data,
                 isLoading: false,
             };
         case `GET_CHECKIN_REJECTED`:

@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux'
 import * as act from '../_actions/room'
 
-class Detail extends Component {
+class checkin extends Component {
 
     constructor() {
         super();
@@ -45,8 +45,8 @@ class Detail extends Component {
 
     showOrder = () => {
         this.props.getOrder(id = this.state.id, token = this.state.token)
-        this.setState({ Order: this.props.order.order.map(res => res.room_id) })
-        this.props.getRoom(id = this.state.id, token = this.state.token)
+        // this.setState({ Order: this.props.order.order.map(res => res.room_id) })
+        // this.props.getRoom(id = this.state.id, token = this.state.token)
 
     }
 
@@ -56,7 +56,7 @@ class Detail extends Component {
             <Container>
                 <View>
                     <FlatList
-                        data={this.props.room.room}
+                        data={this.props.order.order}
                         numColumns={3}
                         renderItem={({ item }) => (
                             <View key={item.id}>
@@ -97,7 +97,7 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Detail)
+)(checkin)
 
 const styles = StyleSheet.create({
 

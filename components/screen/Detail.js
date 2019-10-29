@@ -238,7 +238,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
-
     modal: {
         justifyContent: 'center',
         alignItems: 'center',

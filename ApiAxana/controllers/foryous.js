@@ -1,4 +1,5 @@
 const models = require('../models')
+const moment = require('moment');
 const customer = models.customer
 const order = models.order
 const room = models.room
@@ -115,9 +116,9 @@ exports.addcheckin = (req, res) => {
         room_id: req.body.room_id,
         customer_id: req.body.customer_id,
         duration: req.body.duration,
-        order_time: req.body.order_time,
-        is_done: req.body.is_done,
-        is_booked: req.body.is_booked
+        order_time: moment().add(req.body.duration, 'minutes'),
+        is_done: true,
+        is_booked: false
     })
         .then(data => {
             res.send(data);
@@ -131,9 +132,9 @@ exports.editorder = (req, res) => {
             room_id: req.body.room_id,
             customer_id: req.body.customer_id,
             duration: req.body.duration,
-            order_time: req.body.order_time,
-            is_done: req.body.is_done,
-            is_booked: req.body.is_booked
+            order_time: moment().add(req.body.duration, 'minutes'),
+            is_done: true,
+            is_booked: false
         },
         {
             where: { id: id },

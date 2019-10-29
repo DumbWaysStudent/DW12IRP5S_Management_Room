@@ -12,8 +12,6 @@ import Login from './components/screen/Login'
 import Detail from './components/screen/Detail'
 import profile from './components/screen/profile'
 import customer from './components/screen/customer'
-
-// import editcustomer from './components/screen/editcustomer'
 import checkin from './components/screen/checkin'
 import addcheckin from './components/screen/addcheckin'
 
@@ -130,24 +128,6 @@ const CustomerStack = createStackNavigator(
 
       })
     },
-
-    // editcustomer: {
-    //   screen: editcustomer,
-    //   title: 'Edit Customer',
-    //   navigationOptions: () => ({
-    //     title: "EDIT CUSTOMER",
-    //     headerStyle: {
-    //       backgroundColor: '#f3b5f5'
-    //     },
-    //     headerTintColor: 'white',
-    //     headerTitleStyles: {
-    //       fontWeight: 'bold',
-    //       fontSize: 22,
-    //       fontFamily: 'Georgia',
-    //     },
-
-    //   })
-    // }
   },
   {
     initialRouteName: 'customer',

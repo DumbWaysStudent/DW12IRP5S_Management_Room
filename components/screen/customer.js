@@ -302,7 +302,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#f3b5f5',
         height: 320,
-        width: 320,
+        width: 300,
         borderRadius: 20
     },
     Insert: {

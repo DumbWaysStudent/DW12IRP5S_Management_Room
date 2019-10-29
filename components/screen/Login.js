@@ -98,38 +98,37 @@ export default class Login extends Component {
       <Container>
         <View style={styles.Theme}>
           <View style={styles.title}>
-
             <Text style={styles.login}>AMBACANG</Text>
-
           </View>
-
           <View style={styles.container}>
-            <View style={styles.formes}>
-              <Form >
-                <Text style={styles.label}>Username</Text>
-                <Item rounded style={{ backgroundColor: 'white' }}>
-                  <Icon active name='home' />
-                  <Input placeholder="Username" onChangeText={username => this.userValidation(username)}
-                    keyboardType="Email" />
-                </Item>
-                <Text style={styles.labels}>Password</Text>
-                <Item rounded style={{ backgroundColor: 'white' }}>
-                  <Icon active name='lock' />
-                  <Input placeholder="Password" secureTextEntry={this.state.pass} onChangeText={password => this.passValidation(password)} />
-                  <Icon name={this.state.icon} onPress={() => this.changeIcon()} />
-                </Item>
+            <Text style={styles.Textadmin}>Login Administrator</Text>
 
-              </Form>
+            {/* <View style={styles.formes}> */}
+            <Form style={styles.formes}>
+              <Text style={styles.label}>Username</Text>
+              <Item rounded style={{ backgroundColor: 'white' }}>
+                <Icon active name='home' />
+                <Input placeholder="Username" onChangeText={username => this.userValidation(username)}
+                  keyboardType="Email" />
+              </Item>
+              <Text style={styles.labels}>Password</Text>
+              <Item rounded style={{ backgroundColor: 'white' }}>
+                <Icon active name='lock' />
+                <Input placeholder="Password" secureTextEntry={this.state.pass} onChangeText={password => this.passValidation(password)} />
+                <Icon name={this.state.icon} onPress={() => this.changeIcon()} />
+              </Item>
+
+
               <Button
                 dark disabled={this.state.isDisabled} rounded block style={styles.button}
                 onPress={() => this.userLogin()}
               >
                 <Text >LOG IN</Text>
               </Button>
-
-            </View>
+            </Form>
           </View>
         </View>
+        {/* </View> */}
 
       </Container>
     )
@@ -139,15 +138,23 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   title: {
     alignItems: "center",
-    marginTop: 70,
+    marginTop: 90,
     marginBottom: 180,
     fontFamily: 'Georgia'
   },
   Theme: {
     backgroundColor: '#f3b5f5',
   },
+  Textadmin: {
+    marginBottom: 20,
+    marginTop: 50,
+    marginHorizontal: 70,
+    fontSize: 20,
+    fontFamily: 'Lora'
+  },
   login: {
     fontSize: 35,
+    color: "#FFFFFF",
   },
   labels: {
     marginTop: 20,
@@ -157,10 +164,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderTopStartRadius: 60,
     borderTopRightRadius: 60,
-    backgroundColor: '#faf7f7',
+    backgroundColor: '#fffcfc',
   },
   formes: {
-    marginTop: 100,
+    marginTop: 20,
     height: hight
   },
   label: {

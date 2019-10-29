@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Container, Content, Footer, FooterTab, Icon, Text, View, Button, Card, CardItem } from 'native-base';
 
 
@@ -15,50 +15,80 @@ export default class Profile extends Component {
 
     render() {
         return (
-            <Container>
-                <Content>
-                    <View style={{ alignItems: 'center', marginVertical: 50 }}>
-                        <Image source={{ uri: 'https://www.caesarsforum.com/properties/flamingo/files/mobile/1.jpg' }}
-                            style={styles.profImg} />
-                        <Text style={styles.ProfText} style={{ fontSize: 20 }}> AMBACANG</Text>
+            <View style={styles.container}>
+                <View style={styles.header}></View>
+                <Image style={styles.avatar} source={{ uri: 'https://static-cdn.jtvnw.net/jtv_user_pictures/pink_screen-profile_image-727b3760759153ce-300x300.jpeg' }} />
+                <View style={styles.body}>
+                    <View style={styles.bodyContent}>
+                        <Text style={styles.name}>AMBACANG</Text>
+                        <Text style={styles.info}>Administrator</Text>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => this.props.navigation.navigate('Login')}>
+                            <Text>Logout</Text>
+                        </TouchableOpacity>
                     </View>
-
-                    <Card>
-                        <CardItem footer button onPress={() => this.props.navigation.navigate('Login')} style={{ backgroundColor: '#f3b5f5' }}>
-                            <Text style={{ color: 'white' }}> Log Out </Text>
-                        </CardItem>
-                    </Card>
-                </Content>
-
-            </Container>
+                </View>
+            </View>
         );
     }
 }
 
-
 const styles = StyleSheet.create({
-    footer: {
-        backgroundColor: '#39c45e',
+    header: {
+        backgroundColor: "#f3b5f5",
+        height: 250,
     },
-
-    icon: {
-        color: 'white'
-    },
-
-    profImg: {
+    avatar: {
         width: 150,
         height: 150,
-        borderRadius: 70,
-        borderWidth: 2,
-        borderColor: '#38D40A'
+        borderRadius: 63,
+        borderWidth: 4,
+        borderColor: "white",
+        marginBottom: 10,
+        alignSelf: 'center',
+        position: 'absolute',
+        marginTop: 160
     },
+    name: {
+        fontSize: 22,
+        color: "#FFFFFF",
+        fontWeight: '600',
+    },
+    body: {
+        marginTop: 40,
+    },
+    bodyContent: {
+        flex: 1,
+        alignItems: 'center',
+        padding: 30,
+    },
+    name: {
+        fontSize: 28,
+        color: "#696969",
+        fontWeight: "600",
+        fontFamily: 'Lato'
+    },
+    info: {
+        fontSize: 16,
+        color: "#f3b5f5",
+        marginTop: 10,
+        fontFamily: 'Lato'
 
-    profText: {
-        marginVertical: 20,
-        marginTop: 20,
-        fontWeight: 'bold',
-        letterSpacing: 2,
-
-    }
-
-})
+    },
+    description: {
+        fontSize: 16,
+        color: "#696969",
+        marginTop: 10,
+        textAlign: 'center'
+    },
+    buttonContainer: {
+        marginTop: 50,
+        height: 45,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 20,
+        width: 250,
+        borderRadius: 30,
+        backgroundColor: "#f3b5f5",
+    },
+});

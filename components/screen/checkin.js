@@ -60,16 +60,15 @@ class Detail extends Component {
                         numColumns={3}
                         renderItem={({ item }) => (
                             <View key={item.id}>
-                                <View style={styles.conView}>
-                                    <Row style={styles.Rows}>
-                                        <View style={styles.conval}>
-                                            <TouchableOpacity onPress={() => this.props.navigation.navigate('')} >
-                                                <Text style={styles.epstxt}>{item.name}</Text>
-                                            </TouchableOpacity>
+                                <Row>
+                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('')} >
+                                        <View style={styles.epstxt}>
+                                            <Text style={styles.namee}>{item.name}</Text>
                                         </View>
-                                    </Row>
-                                </View>
+                                    </TouchableOpacity>
+                                </Row>
                             </View>
+
                         )}
 
                     />
@@ -128,10 +127,19 @@ const styles = StyleSheet.create({
     },
 
     epstxt: {
-        padding: 35,
+        // padding: 30,
+        margin: 18,
+        width: 100,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: 5,
         backgroundColor: '#f9defa',
-        marginTop: 5,
+        marginTop: 20,
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    namee: {
         fontSize: 20,
         fontWeight: 'bold'
     },

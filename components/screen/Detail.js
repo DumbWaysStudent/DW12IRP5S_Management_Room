@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, FlatList, Text, TouchableOpacity } from 'react-native';
-import { Container, Content, View, Row, Footer, Button, Fab, FooterTab, Icon } from 'native-base';
-// import { ip } from '../ip'
-// import axios from 'axios';
+import { Container, Content, View, Row, Item, Input, Button, Fab, Icon } from 'native-base';
 import Modal from 'react-native-modalbox';
 import { TextInput } from 'react-native-gesture-handler';
 import axios from 'axios'
@@ -53,6 +51,7 @@ class Detail extends Component {
 
     }
 
+
     addroom = () => {
         axios({
             method: 'POST',
@@ -99,31 +98,27 @@ class Detail extends Component {
     render() {
         return (
             <Container>
-                <View>
-                    <FlatList
-                        data={this.props.room.room}
-                        numColumns={3}
-                        keyExtractor={item => item.id}
-                        renderItem={({ item }) => (
-                            <View >
-                                <View style={styles.conView}>
+                <Content>
+                    <View>
+                        <FlatList
+                            data={this.props.room.room}
+                            numColumns={3}
+                            keyExtractor={item => item.id}
+                            renderItem={({ item }) => (
+                                <View >
                                     <Row>
-                                        <View style={styles.conval}>
-                                            <TouchableOpacity
-                                                onPress={() => this.handleModalEdit(item.name, item.id)}
-                                            >
-                                                <Text style={styles.epstxt}>{item.name}</Text>
-                                            </TouchableOpacity>
-                                        </View>
+                                        <TouchableOpacity onPress={() => this.handleModalEdit(item.name, item.id)}>
+                                            <View style={styles.epstxt}>
+                                                <Text style={styles.namee}>{item.name}</Text>
+                                            </View>
+                                        </TouchableOpacity>
                                     </Row>
                                 </View>
-                            </View>
-                        )}
+                            )}
 
-                    />
-                </View>
-
-                <Content />
+                        />
+                    </View>
+                </Content>
                 <View >
                     <Fab
                         active={this.state.active}
@@ -140,15 +135,17 @@ class Detail extends Component {
                     position={"center"}
                     ref={"modalAdd"}>
                     <View style={{ position: "absolute" }}>
-                        <View style={{ alignItems: 'center', marginBottom: 20 }}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Add Room</Text>
+                        <View style={{ alignItems: 'center', marginBottom: 15 }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>ADD ROOM</Text>
                         </View>
                         <View>
-                            <TextInput
-                                placeholder='Room Name'
-                                onChangeText={name => this.setState({ name })}
-                                style={styles.TextInput}
-                            />
+                            <Item style={{ borderColor: 'black', marginBottom: 20 }}>
+                                <Icon type="FontAwesome5" name="bed" />
+                                <Input
+                                    placeholder="Name"
+                                    onChangeText={name => this.setState({ name })}
+                                />
+                            </Item>
                             <Row>
                                 <Button
                                     style={styles.Cancel}
@@ -171,16 +168,18 @@ class Detail extends Component {
                     position={"center"}
                     ref={"modalEdit"}>
                     <View style={{ position: "absolute" }}>
-                        <View style={{ alignItems: 'center', marginBottom: 20 }}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Edit Room</Text>
+                        <View style={{ alignItems: 'center', marginBottom: 15 }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>EDIT ROOM</Text>
                         </View>
                         <View>
-                            <TextInput
-                                placeholder='Room Name'
-                                value={this.state.name}
-                                onChangeText={name => this.setState({ name })}
-                                style={styles.TextInput}
-                            />
+                            <Item style={{ borderColor: 'black', marginBottom: 20 }}>
+                                <Icon type="FontAwesome5" name="bed" />
+                                <Input
+                                    value={this.state.name}
+                                    placeholder="Name"
+                                    onChangeText={name => this.setState({ name })}
+                                />
+                            </Item>
                             <Row>
                                 <Button
                                     style={styles.Cancel}
@@ -223,27 +222,29 @@ export default connect(
 const styles = StyleSheet.create({
 
     epstxt: {
-        padding: 35,
+        // padding: 30,
+        margin: 18,
+        width: 100,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: 5,
         backgroundColor: '#f9defa',
-        marginTop: 5,
+        marginTop: 20,
         fontSize: 20,
         fontWeight: 'bold'
     },
-    conView: {
-        marginHorizontal: 10,
-        marginBottom: 10,
+    namee: {
+        fontSize: 20,
+        fontWeight: 'bold'
     },
 
-    conval: {
-        margin: 10,
-    },
     modal: {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#f3b5f5',
         height: 200,
-        width: 320,
+        width: 300,
         borderRadius: 20
     },
     Cancel: {

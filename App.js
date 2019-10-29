@@ -1,9 +1,4 @@
 
-// import Login from './components/screen/Login';
-// import ForYou from './components/screen/ForYou';
-// import Detail from './components/screen/Detail';
-
-// export default Detail;
 import React, { Component } from 'react';
 import { Icon } from 'native-base';
 import { Provider } from 'react-redux';
@@ -17,8 +12,8 @@ import Login from './components/screen/Login'
 import Detail from './components/screen/Detail'
 import profile from './components/screen/profile'
 import customer from './components/screen/customer'
-import addcustomer from './components/screen/addcustomer'
-import editcustomer from './components/screen/editcustomer'
+
+// import editcustomer from './components/screen/editcustomer'
 import checkin from './components/screen/checkin'
 import addcheckin from './components/screen/addcheckin'
 
@@ -50,46 +45,11 @@ const RoomStack = createStackNavigator(
         headerTitleStyles: {
           fontWeight: 'bold',
           fontSize: 22,
-          fontFamily: 'Georgia',
+          fontFamily: 'Roboto',
         },
 
       })
     },
-    // addroom: {
-    //   screen: addroom,
-    //   title: 'Add Room',
-    //   navigationOptions: () => ({
-    //     title: "ADD ROOM",
-    //     headerStyle: {
-    //       backgroundColor: '#f3b5f5'
-    //     },
-    //     headerTintColor: 'white',
-    //     headerTitleStyles: {
-    //       fontWeight: 'bold',
-    //       fontSize: 22,
-    //       fontFamily: 'Georgia',
-    //     },
-
-    //   })
-
-    // },
-    // editroom: {
-    //   screen: editroom,
-    //   title: 'Edit Room',
-    //   navigationOptions: () => ({
-    //     title: "EDIT ROOM",
-    //     headerStyle: {
-    //       backgroundColor: '#f3b5f5'
-    //     },
-    //     headerTintColor: 'white',
-    //     headerTitleStyles: {
-    //       fontWeight: 'bold',
-    //       fontSize: 22,
-    //       fontFamily: 'Georgia',
-    //     },
-
-    //   })
-    // }
   },
   {
     initialRouteName: 'Detail',
@@ -110,7 +70,7 @@ const CheckinStack = createStackNavigator(
         headerTitleStyles: {
           fontWeight: 'bold',
           fontSize: 22,
-          fontFamily: 'Georgia',
+          fontFamily: 'Roboto',
         },
 
       })
@@ -143,19 +103,7 @@ const SettingStack = createStackNavigator(
     profile: {
       screen: profile,
       title: 'Setting',
-      navigationOptions: () => ({
-        title: "SETTING",
-        headerStyle: {
-          backgroundColor: '#f3b5f5'
-        },
-        headerTintColor: 'white',
-        headerTitleStyles: {
-          fontWeight: 'bold',
-          fontSize: 22,
-          fontFamily: 'Georgia',
-        },
-
-      })
+      navigationOptions: { header: null },
     }
   },
   {
@@ -177,45 +125,29 @@ const CustomerStack = createStackNavigator(
         headerTitleStyles: {
           fontWeight: 'bold',
           fontSize: 22,
-          fontFamily: 'Georgia',
+          fontFamily: 'Lora'
         },
 
       })
     },
-    addcustomer: {
-      screen: addcustomer,
-      title: 'Add Customer',
-      navigationOptions: () => ({
-        title: "ADD CUSTOMER",
-        headerStyle: {
-          backgroundColor: '#f3b5f5'
-        },
-        headerTintColor: 'white',
-        headerTitleStyles: {
-          fontWeight: 'bold',
-          fontSize: 22,
-          fontFamily: 'Georgia',
-        },
 
-      })
-    },
-    editcustomer: {
-      screen: editcustomer,
-      title: 'Edit Customer',
-      navigationOptions: () => ({
-        title: "EDIT CUSTOMER",
-        headerStyle: {
-          backgroundColor: '#f3b5f5'
-        },
-        headerTintColor: 'white',
-        headerTitleStyles: {
-          fontWeight: 'bold',
-          fontSize: 22,
-          fontFamily: 'Georgia',
-        },
+    // editcustomer: {
+    //   screen: editcustomer,
+    //   title: 'Edit Customer',
+    //   navigationOptions: () => ({
+    //     title: "EDIT CUSTOMER",
+    //     headerStyle: {
+    //       backgroundColor: '#f3b5f5'
+    //     },
+    //     headerTintColor: 'white',
+    //     headerTitleStyles: {
+    //       fontWeight: 'bold',
+    //       fontSize: 22,
+    //       fontFamily: 'Georgia',
+    //     },
 
-      })
-    }
+    //   })
+    // }
   },
   {
     initialRouteName: 'customer',

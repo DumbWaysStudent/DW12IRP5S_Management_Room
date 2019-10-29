@@ -122,7 +122,7 @@ class customer extends Component {
                         renderItem={({ item }) => (
                             <View style={styles.conView}>
                                 <ListItem>
-                                    <Row style={{ marginTop: 10 }}>
+                                    <Row style={{ marginTop: 5 }}>
                                         <TouchableOpacity
                                             onPress={() => this.handleModalEdit(item.id, item.name, item.identity_card, item.phone_number)}>
                                             <Image style={styles.conImg} source={require('./profile.png')} />

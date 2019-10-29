@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Container, Content, View, Text, Form, Item, Input, Button, Icon } from 'native-base';
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import axios from 'axios'
 import AsyncStorage from '@react-native-community/async-storage'
 import { ip } from '../ip'
 
-
+const hight = Dimensions.get('window').height
 export default class Login extends Component {
   constructor() {
     super();
@@ -96,9 +96,7 @@ export default class Login extends Component {
   render() {
     return (
       <Container>
-
-        <Content padder >
-
+        <View style={styles.Theme}>
           <View style={styles.title}>
 
             <Text style={styles.login}>AMBACANG</Text>
@@ -108,14 +106,13 @@ export default class Login extends Component {
           <View style={styles.container}>
             <View style={styles.formes}>
               <Form >
-
                 <Text style={styles.label}>Username</Text>
                 <Item rounded style={{ backgroundColor: 'white' }}>
                   <Icon active name='home' />
                   <Input placeholder="Username" onChangeText={username => this.userValidation(username)}
                     keyboardType="Email" />
                 </Item>
-                <Text style={styles.label}>Password</Text>
+                <Text style={styles.labels}>Password</Text>
                 <Item rounded style={{ backgroundColor: 'white' }}>
                   <Icon active name='lock' />
                   <Input placeholder="Password" secureTextEntry={this.state.pass} onChangeText={password => this.passValidation(password)} />
@@ -132,8 +129,8 @@ export default class Login extends Component {
 
             </View>
           </View>
+        </View>
 
-        </Content>
       </Container>
     )
   }
@@ -142,45 +139,35 @@ export default class Login extends Component {
 const styles = StyleSheet.create({
   title: {
     alignItems: "center",
-    marginTop: 45,
-    marginBottom: 120,
-
-    fontFamily: 'Austin-Light'
+    marginTop: 70,
+    marginBottom: 180,
+    fontFamily: 'Georgia'
   },
-  label: {
-    padding: 5
-  },
-  logo: {
-    width: 200,
-    height: 200
+  Theme: {
+    backgroundColor: '#f3b5f5',
   },
   login: {
     fontSize: 35,
-
+  },
+  labels: {
+    marginTop: 20,
+    fontWeight: 'bold'
   },
   container: {
-    paddingHorizontal: 10,
-    justifyContent: 'center',
-    borderTopRightRadius: 100,
-    backgroundColor: '#f3b5f5',
+    paddingHorizontal: 30,
+    borderTopStartRadius: 60,
+    borderTopRightRadius: 60,
+    backgroundColor: '#faf7f7',
   },
   formes: {
-    marginTop: 50,
-    marginBottom: 300,
+    marginTop: 100,
+    height: hight
   },
   label: {
     padding: 5,
     fontWeight: 'bold'
   },
   button: {
-    marginTop: 20,
+    marginTop: 30,
   },
-  skip: {
-    alignItems: 'center',
-    marginTop: 35,
-  },
-  skipText: {
-    color: '#66cdaa',
-
-  }
 })

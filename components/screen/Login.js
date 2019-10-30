@@ -99,6 +99,7 @@ export default class Login extends Component {
         <View style={styles.Theme}>
           <View style={styles.title}>
             <Text style={styles.login}>AMBACANG</Text>
+            <Text style={styles.loginn}>Ambacang To Live Word</Text>
           </View>
           <View style={styles.container}>
             <Text style={styles.Textadmin}>Login Administrator</Text>
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
   title: {
     alignItems: "center",
     marginTop: 90,
-    marginBottom: 180,
+    marginBottom: 150,
     fontFamily: 'Georgia'
   },
   Theme: {
@@ -155,8 +156,12 @@ const styles = StyleSheet.create({
   },
   login: {
     fontSize: 35,
+    color: "#696969",
+    marginBottom: 10
+  },
+  loginn: {
+    fontSize: 12,
     color: "#696969"
-
   },
   labels: {
     marginTop: 20,

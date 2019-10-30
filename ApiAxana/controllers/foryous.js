@@ -1,5 +1,5 @@
 const models = require('../models')
-const moment = require('moment');
+const moment = require('moment')
 const customer = models.customer
 const order = models.order
 const room = models.room
@@ -98,6 +98,7 @@ exports.checkin = (req, res) => {
             },
             through: {
                 model: order,
+                where: { is_done: false },
                 as: "roomed",
                 attributes: {
                     exclude: ["updateAt", "createdAt"]
@@ -117,8 +118,22 @@ exports.addcheckin = (req, res) => {
         customer_id: req.body.customer_id,
         duration: req.body.duration,
         order_time: moment().add(req.body.duration, 'minutes'),
-        is_done: true,
-        is_booked: false
+        is_done: false,
+        is_booked: true
+    })
+    room.findAll({
+        include: [
+            {
+                model: customer,
+                attributes: { exclude: ['createdAt', 'updatedAt'] },
+                through: {
+                    model: order,
+                    where: { is_done: false },
+                    attributes: { exclude: ['createdAt', 'updatedAt'] }
+                }
+            }
+        ],
+        attributes: { exclude: ['createdAt', 'updatedAt'] }
     })
         .then(data => {
             res.send(data);
@@ -129,15 +144,12 @@ exports.editorder = (req, res) => {
 
     order.update(
         {
-            room_id: req.body.room_id,
             customer_id: req.body.customer_id,
-            duration: req.body.duration,
-            order_time: moment().add(req.body.duration, 'minutes'),
             is_done: true,
             is_booked: false
         },
         {
-            where: { id: id },
+            where: { room_id: id },
         })
         .then(data => {
             res.send({ data });

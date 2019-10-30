@@ -1,31 +1,55 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, FlatList, Text, TouchableOpacity } from 'react-native';
-import { Container, Content, View, Row, Footer, Button, Fab, FooterTab, Icon } from 'native-base';
-import { ip } from '../ip'
-import axios from 'axios';
-import Modal from 'react-native-modalbox'
-import AsyncStorage from '@react-native-community/async-storage';
+import {
+    Container,
+    Content,
+    View,
+    Text,
+    Item,
+    Input,
+    Button,
+    Header,
+    Body,
+    Title,
+    Row,
+    Icon,
+
+}
+    from 'native-base';
+import { StyleSheet, FlatList, Picker, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native'
+import { TextInput } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage'
+import Modal from 'react-native-modalbox';
 import { connect } from 'react-redux'
 import * as act from '../_actions/room'
+import { ip } from '../ip'
+import axios from 'axios'
+import CountDown from 'react-native-countdown-component'
 
-class checkin extends Component {
+class Checkin extends Component {
 
     constructor() {
         super();
         this.state = {
-            id: null,
             token: null,
-            Order: [],
-
-
+            name: '',
+            roomID: null,
+            duration: null,
+            durationCO: 0,
+            customerId: null,
+            customer: '',
+            orderId: null
         }
     }
+
     async componentDidMount() {
         await this.getToken()
-        await this.getId()
+        // await this.getId()
         this.showOrder()
+        console.log(this.props.order)
+        this.showCustomer()
         this.focusListener = this.props.navigation.addListener('didFocus', () => {
             this.showOrder()
+            this.showCustomer()
         })
 
     }
@@ -37,21 +61,78 @@ class checkin extends Component {
         })
     }
 
-
-    async getId() {
-        await AsyncStorage.getItem('id').then(key =>
-            this.setState({
-                id: JSON.parse(key)
-            }))
-    }
-
     showOrder = () => {
-        this.props.getOrder(id = this.state.id, token = this.state.token)
-        // this.setState({ Order: this.props.order.order.map(res => res.room_id) })
-        // this.props.getRoom(id = this.state.id, token = this.state.token)
-
+        this.props.getOrder(token = this.state.token)
     }
 
+    showCustomer = () => {
+        this.props.getCustomer(token = this.state.token)
+    }
+
+    handleModalCheckin = (name, roomID) => {
+        this.setState({
+            name,
+            roomID
+        })
+        this.refs.modalCheckin.open()
+    }
+
+    checkin = () => {
+        this.props.checkin(this.state.token, this.state.roomID, this.state.customerId, this.state.duration)
+        this.props.getOrder(token = this.state.token)
+        this.refs.modalCheckin.close()
+        this.setState({
+            duration: null
+        })
+    }
+
+    handleModalCheckout = (name, roomID, customer, customerId, orderId, durationCO) => {
+        this.setState({
+            name,
+            roomID,
+            customer,
+            customerId,
+            orderId,
+            durationCO
+        })
+        this.refs.modalCheckout.open()
+    }
+
+    checkout = () => {
+        axios({
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${this.state.token}`
+            },
+            url: `${ip}/order/${this.state.orderId}`,
+            data: {
+                room_id: this.state.roomID,
+                customer_id: this.state.customerId,
+                duration: this.state.duration
+            }
+        }).then(res => {
+            this.refs.modalCheckout.close()
+            this.setState({
+                durationCO: 0
+            })
+            this.showOrder()
+        })
+    }
+
+    checkoutTimer = (orderId) => {
+        axios({
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${this.state.token}`
+            },
+            url: `${ip}/order/${orderId}`,
+            data: {}
+        }).then(res => {
+            this.showOrder()
+        })
+    }
 
     render() {
         return (
@@ -66,16 +147,26 @@ class checkin extends Component {
                                 {item.custom.length > 0 ?
                                     (<View >
                                         <TouchableOpacity
-                                            onPress={() => this.props.navigation.navigate('')}
+                                            onPress={() => this.handleModalCheckout(item.name, item.id, item.custom[0].name, item.custom[0].id, item.custom[0].roomed.id, item.custom[0].roomed.duration)}
                                         >
                                             <View style={styles.epstxt}>
                                                 <Text style={styles.namee}>{item.name}</Text>
+                                                <CountDown
+                                                    until={(item.custom[0].roomed.duration)}
+                                                    size={10}
+                                                    digitStyle={styles.DurationStyle}
+                                                    timeToShow={['M', 'S']}
+                                                    timeLabels={{}}
+                                                    onFinish={() => this.checkoutTimer(item.custom[0].roomed.room_id)}
+                                                />
                                             </View>
+
                                         </TouchableOpacity>
+
                                     </View>) :
                                     (<View >
                                         <TouchableOpacity
-                                            onPress={() => this.props.navigation.navigate('')}
+                                            onPress={() => this.handleModalCheckin(item.name, item.id)}
                                         >
                                             <View style={styles.epstxtt}>
                                                 <Text style={styles.namee}>{item.name}</Text>
@@ -88,55 +179,179 @@ class checkin extends Component {
                 </View>
 
                 <Content />
+                <Modal
+                    style={styles.modal}
+                    position={"center"}
+                    ref={"modalCheckin"}>
+                    <View style={{ position: "absolute", width: 250 }}>
+                        <View style={{ alignItems: 'center', marginBottom: 10 }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>ADD CHECK IN</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.label}>Room</Text>
+                            <TextInput
+                                placeholder='Room Name'
+                                value={this.state.name}
+                                editable={false}
+                                style={styles.TextInput}
+                            />
+                            <Text style={styles.label}>Customer</Text>
+                            <View style={styles.TextInput}>
+                                <Picker
+                                    selectedValue={this.state.customerId}
+                                    onValueChange={(itemValue) =>
+                                        this.setState({
+                                            customerId: itemValue
+                                        })
+                                    }
+                                >
+                                    {this.props.customer.customer.map((item) => {
+                                        return <Picker.Item key={item.id} value={item.id} label={item.name} />
+                                    })}
+                                </Picker>
+                            </View>
+                            <Text style={styles.label}>Duration (minutes)</Text>
+                            <TextInput
+                                keyboardType="numeric"
+                                value={this.state.duration}
+                                onChangeText={duration => this.setState({ duration })}
+                                style={styles.TextInput}
+                            />
+                        </View>
+                        <View style={{ alignItems: 'center' }}>
+                            <Row>
+                                <Button
+                                    style={styles.ButtonCancel}
+                                    onPress={() => this.refs.modalCheckin.close()}
+                                >
+                                    <Text>Cancel</Text>
+                                </Button>
+                                <Button
+                                    style={styles.ButtonSave}
+                                    onPress={() => this.checkin()}
+                                >
+                                    <Text>Check In</Text>
+                                </Button>
+                            </Row>
+                        </View>
+                    </View>
+                </Modal>
+                <Modal
+                    style={styles.modal}
+                    position={"center"}
+                    ref={"modalCheckout"}>
+                    <View style={{ position: "absolute", width: 250 }}>
+                        <View style={{ alignItems: 'center', marginBottom: 10 }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold' }}>CHECKOUT</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.label}>Room</Text>
+                            <TextInput
+                                value={this.state.name}
+                                editable={false}
+                                style={styles.TextInput}
+                            />
+                            <Text style={styles.label}>Customer</Text>
+                            <TextInput
+                                value={this.state.customer}
+                                editable={false}
+                                style={styles.TextInput}
+                            />
+                            <Text style={styles.label}>Duration (minutes)</Text>
+                            <TextInput
+                                value={this.state.durationCO.toString()}
+                                editable={false}
+                                style={styles.TextInput}
+                            />
+
+                        </View>
+                        <View style={{ alignItems: 'center' }}>
+                            <Row>
+                                <Button
+                                    style={styles.ButtonCancel}
+                                    onPress={() => this.refs.modalCheckout.close()}
+                                >
+                                    <Text>Cancel</Text>
+                                </Button>
+                                <Button
+                                    style={styles.ButtonSave}
+                                    onPress={() => this.checkout()}
+                                >
+                                    <Text>Check Out</Text>
+                                </Button>
+                            </Row>
+                        </View>
+                    </View>
+                </Modal>
 
             </Container>
         );
     }
 }
 
+
 const mapStateToProps = state => {
     return {
         order: state.order,
-        room: state.room
+        room: state.room,
+        customer: state.customer
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        getOrder: (id, token) => dispatch(act.getOrder(id, token)),
-        getRoom: (id, token) => dispatch(act.getRoom(id, token))
+        getOrder: (token) => dispatch(act.getOrder(token)),
+        getRoom: (token) => dispatch(act.getRoom(token)),
+        getCustomer: (token) => dispatch(act.getCustomer(token)),
+        checkin: (token, roomID, customerId, duration) => dispatch(act.checkin(token, roomID, customerId, duration))
     }
 }
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(checkin)
+)(Checkin)
 
 const styles = StyleSheet.create({
-
-    headcon: {
-        marginHorizontal: 15,
-        marginTop: 15,
-        alignSelf: 'center'
+    modal: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#f3b5f5',
+        height: 400,
+        width: 300,
+        borderRadius: 20
     },
-
-    conView: {
-        marginHorizontal: 10
-
+    ButtonCancel: {
+        marginTop: 10,
+        marginHorizontal: 5,
+        borderRadius: 5,
+        backgroundColor: '#f5e90c'
     },
-    icon: {
-        color: "white"
+    ButtonSave: {
+        marginTop: 10,
+        marginHorizontal: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        backgroundColor: '#ff8af5'
     },
-
-    conImg: {
-        width: 100,
-        height: 100,
-        borderWidth: 3,
-        borderColor: 'black'
+    TextInput: {
+        backgroundColor: 'white',
+        borderWidth: 2,
+        borderColor: '#ff8af5',
+        marginBottom: 3,
+        borderRadius: 10,
+        fontSize: 15,
+        textAlign: 'center'
     },
-
-    conval: {
-        margin: 15
+    label: {
+        marginTop: 5,
+        fontWeight: 'bold'
+    },
+    DurationStyle: {
+        backgroundColor: '#f3b5f5',
+        color: '#1CC625',
+        marginBottom: -30,
+        marginTop: 1
     },
 
     epstxt: {
@@ -169,11 +384,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold'
     },
-    conView: {
-        marginHorizontal: 10,
-        marginBottom: 10,
-    },
-
     conImg: {
         width: 100,
         height: 100,
@@ -182,13 +392,4 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         borderColor: 'black'
     },
-
-    conval: {
-        margin: 10,
-    }
-
-
-
-
-
 })

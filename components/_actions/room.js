@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { ip } from '../ip'
 
-export const getRoom = (id, token) => {
+export const getRoom = (token) => {
     return {
         type: 'GET_ROOMS',
         payload: axios({
@@ -15,7 +15,7 @@ export const getRoom = (id, token) => {
     }
 }
 
-export const getCustomer = (id, token) => {
+export const getCustomer = (token) => {
     return {
         type: 'GET_CUSTOMERS',
         payload: axios({
@@ -29,7 +29,7 @@ export const getCustomer = (id, token) => {
     }
 }
 
-export const getOrder = (id, token) => {
+export const getOrder = (token) => {
     return {
         type: 'GET_CHECKIN',
         payload: axios({
@@ -39,6 +39,25 @@ export const getOrder = (id, token) => {
                 'authorization': `Bearer ${token}`
             },
             url: `${ip}/checkin`
+        })
+    }
+}
+
+export const checkin = (token, roomID, customerId, duration) => {
+    return {
+        type: 'CHECKIN',
+        payload: axios({
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                'authorization': `Bearer ${token}`
+            },
+            url: `${ip}/orders`,
+            data: {
+                room_id: roomID,
+                customer_id: customerId,
+                duration: duration
+            }
         })
     }
 }

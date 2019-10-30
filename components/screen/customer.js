@@ -14,7 +14,7 @@ class customer extends Component {
     constructor() {
         super();
         this.state = {
-            id: null,
+            // id: null,
             token: null,
             customerId: null,
             name: '',
@@ -26,7 +26,7 @@ class customer extends Component {
     }
     async componentDidMount() {
         await this.getToken()
-        await this.getId()
+        // await this.getId()
         this.showCustomer()
         this.focusListener = this.props.navigation.addListener('didFocus', () => {
             this.showCustomer()
@@ -42,15 +42,15 @@ class customer extends Component {
 
     }
 
-    async getId() {
-        await AsyncStorage.getItem('id').then(key =>
-            this.setState({
-                id: JSON.parse(key)
-            }))
-    }
+    // async getId() {
+    //     await AsyncStorage.getItem('id').then(key =>
+    //         this.setState({
+    //             id: JSON.parse(key)
+    //         }))
+    // }
 
     showCustomer = () => {
-        this.props.getCustomer(id = this.state.id, token = this.state.token)
+        this.props.getCustomer(token = this.state.token)
 
     }
 
@@ -203,7 +203,7 @@ class customer extends Component {
                     ref={"EditCustomer"}>
                     <View style={{ position: "absolute" }} >
                         <View style={{ alignItems: 'center', marginBottom: 20, }}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 5 }}> ADD CUSTOMER</Text>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', marginBottom: 5 }}> EDIT CUSTOMER</Text>
                             <Item style={{ borderColor: 'black' }}>
                                 <Icon type="FontAwesome5" name="user-circle" />
                                 <Input
@@ -258,7 +258,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getCustomer: (id, token) => dispatch(act.getCustomer(id, token))
+        getCustomer: (token) => dispatch(act.getCustomer(token))
     }
 }
 
@@ -300,7 +300,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#f3b5f5',
         height: 320,
-        width: 280,
+        width: 300,
         borderRadius: 15
     },
     Insert: {

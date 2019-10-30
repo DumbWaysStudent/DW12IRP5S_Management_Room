@@ -23,6 +23,23 @@ const order = (state = initialState, action) => {
                 error: true,
                 isLoading: false,
             };
+        case `CHECKIN_PENDING`:
+            return {
+                ...state,
+                isLoading: true,
+            };
+        case `CHECKIN_FULFILLED`:
+            return {
+                ...state,
+                order: action.payload.data,
+                isLoading: false,
+            };
+        case `CHECKIN_REJECTED`:
+            return {
+                ...state,
+                error: true,
+                isLoading: false,
+            };
         default:
             return state;
     }

@@ -13,7 +13,7 @@ import Detail from './components/screen/Detail'
 import profile from './components/screen/profile'
 import customer from './components/screen/customer'
 import checkin from './components/screen/checkin'
-import addcheckin from './components/screen/addcheckin'
+
 
 
 const SignedOut = createStackNavigator(
@@ -73,23 +73,7 @@ const CheckinStack = createStackNavigator(
 
       })
     },
-    addcheckin: {
-      screen: addcheckin,
-      title: 'Add Check In',
-      navigationOptions: () => ({
-        title: "ADD CHECK IN",
-        headerStyle: {
-          backgroundColor: '#f3b5f5'
-        },
-        headerTintColor: 'white',
-        headerTitleStyles: {
-          fontWeight: 'bold',
-          fontSize: 22,
-          fontFamily: 'Georgia',
-        },
 
-      })
-    },
   },
   {
     initialRouteName: 'checkin',

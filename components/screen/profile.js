@@ -1,17 +1,53 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { Container, Content, Footer, FooterTab, Icon, Text, View, Button, Card, CardItem } from 'native-base';
+import { connect } from 'react-redux'
+import * as act from '../_actions/users'
+import AsyncStorage from '@react-native-community/async-storage';
 
-
-export default class Profile extends Component {
+class Profile extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            token: '',
-            banners: []
+            id: null,
+            token: null
+
         }
     }
+
+    async componentDidMount() {
+        await this.getToken()
+        await this.getId()
+        this.User()
+        console.log(this.props.user, "??????????????????")
+    }
+
+    async getToken() {
+        const getToken = await AsyncStorage.getItem('token')
+        this.setState({
+            token: getToken
+        })
+    }
+
+
+    async getId() {
+        await AsyncStorage.getItem('id').then(key =>
+            this.setState({
+                id: JSON.parse(key)
+            }))
+    }
+
+    User = () => {
+        this.props.getUser(id = this.state.id, token = this.state.token)
+    }
+
+    async logout() {
+        await AsyncStorage.removeItem('token')
+        await AsyncStorage.removeItem('id')
+        this.props.navigation.navigate('Login')
+    }
+
 
     render() {
         return (
@@ -22,7 +58,7 @@ export default class Profile extends Component {
                     <View style={styles.bodyContent}>
                         <Text style={styles.name}>AMBACANG</Text>
                         <Text style={styles.info}>Administrator</Text>
-                        <TouchableOpacity style={styles.buttonContainer} onPress={() => this.props.navigation.navigate('Login')}>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => this.logout()}>
                             <Text>Logout</Text>
                         </TouchableOpacity>
                     </View>
@@ -31,6 +67,23 @@ export default class Profile extends Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        user: state.user,
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        getUser: (id, token) => dispatch(act.getUser(id, token))
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Profile)
 
 const styles = StyleSheet.create({
     header: {

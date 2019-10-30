@@ -22,6 +22,7 @@ app.group("/api/v1", (router) => {
     // Login 
     router.post('/login', AuthController.login)
     router.post('/register', AuthController.register)
+    router.get('/user/:id', authenticated, AuthController.show)
     router.get('/rooms', authenticated, ForyousController.index)
     router.post('/room', authenticated, ForyousController.add)
     router.put('/room/:id', authenticated, ForyousController.edit)

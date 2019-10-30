@@ -270,12 +270,9 @@ export default connect(
 const styles = StyleSheet.create({
 
     conView: {
-        borderWidth: 1,
         margin: 10,
-        padding: 5,
         backgroundColor: 'white',
         justifyContent: 'center',
-        borderRadius: 10,
         borderColor: 'white',
 
     },
@@ -283,7 +280,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginHorizontal: 10,
         fontWeight: 'bold',
-        marginBottom: 5
+        marginBottom: 5,
+        color: "#696969",
     },
     idCustomer: {
         marginHorizontal: 10,
@@ -302,8 +300,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#f3b5f5',
         height: 320,
-        width: 300,
-        borderRadius: 20
+        width: 280,
+        borderRadius: 15
     },
     Insert: {
         marginHorizontal: 5,

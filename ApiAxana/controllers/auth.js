@@ -47,3 +47,13 @@ exports.register = (req, res) => {
         }
     })
 }
+
+exports.show = (req, res) => {
+    User.findOne({
+        where: { id: req.params.id }
+    })
+        .then(user => {
+            res.send(user)
+        })
+}
+

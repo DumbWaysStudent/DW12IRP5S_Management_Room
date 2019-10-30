@@ -102,30 +102,31 @@ export default class Login extends Component {
           </View>
           <View style={styles.container}>
             <Text style={styles.Textadmin}>Login Administrator</Text>
+            <View>
+              {/* <View style={styles.formes}> */}
+              <Form style={styles.formes}>
+                <Text style={styles.label}>Username</Text>
+                <Item rounded style={{ backgroundColor: 'white' }}>
+                  <Icon active name='home' />
+                  <Input placeholder="Username" onChangeText={username => this.userValidation(username)}
+                    keyboardType="Email" />
+                </Item>
+                <Text style={styles.labels}>Password</Text>
+                <Item rounded style={{ backgroundColor: 'white' }}>
+                  <Icon active name='lock' />
+                  <Input placeholder="Password" secureTextEntry={this.state.pass} onChangeText={password => this.passValidation(password)} />
+                  <Icon name={this.state.icon} onPress={() => this.changeIcon()} />
+                </Item>
 
-            {/* <View style={styles.formes}> */}
-            <Form style={styles.formes}>
-              <Text style={styles.label}>Username</Text>
-              <Item rounded style={{ backgroundColor: 'white' }}>
-                <Icon active name='home' />
-                <Input placeholder="Username" onChangeText={username => this.userValidation(username)}
-                  keyboardType="Email" />
-              </Item>
-              <Text style={styles.labels}>Password</Text>
-              <Item rounded style={{ backgroundColor: 'white' }}>
-                <Icon active name='lock' />
-                <Input placeholder="Password" secureTextEntry={this.state.pass} onChangeText={password => this.passValidation(password)} />
-                <Icon name={this.state.icon} onPress={() => this.changeIcon()} />
-              </Item>
 
-
-              <Button
-                dark disabled={this.state.isDisabled} rounded block style={styles.button}
-                onPress={() => this.userLogin()}
-              >
-                <Text >LOG IN</Text>
-              </Button>
-            </Form>
+                <Button
+                  dark disabled={this.state.isDisabled} rounded block style={styles.button}
+                  onPress={() => this.userLogin()}
+                >
+                  <Text >LOG IN</Text>
+                </Button>
+              </Form>
+            </View>
           </View>
         </View>
         {/* </View> */}
@@ -154,7 +155,8 @@ const styles = StyleSheet.create({
   },
   login: {
     fontSize: 35,
-    color: "#FFFFFF",
+    color: "#696969"
+
   },
   labels: {
     marginTop: 20,

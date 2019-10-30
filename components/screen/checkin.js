@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, FlatList, Text, TouchableOpacity } from 'react-native';
 import { Container, Content, View, Row, Footer, Button, Fab, FooterTab, Icon } from 'native-base';
-// import { ip } from '../ip'
-// import axios from 'axios';
+import { ip } from '../ip'
+import axios from 'axios';
+import Modal from 'react-native-modalbox'
 import AsyncStorage from '@react-native-community/async-storage';
 import { connect } from 'react-redux'
 import * as act from '../_actions/room'
@@ -14,7 +15,8 @@ class checkin extends Component {
         this.state = {
             id: null,
             token: null,
-            Order: []
+            Order: [],
+
 
         }
     }
@@ -57,21 +59,32 @@ class checkin extends Component {
                 <View>
                     <FlatList
                         data={this.props.order.order}
+                        keyExtractor={item => item.id}
                         numColumns={3}
-                        renderItem={({ item }) => (
-                            <View key={item.id}>
-                                <Row>
-                                    <TouchableOpacity onPress={() => this.props.navigation.navigate('')} >
-                                        <View style={styles.epstxt}>
-                                            <Text style={styles.namee}>{item.name}</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                </Row>
+                        renderItem={({ item }) =>
+                            <View >
+                                {item.custom.length > 0 ?
+                                    (<View >
+                                        <TouchableOpacity
+                                            onPress={() => this.props.navigation.navigate('')}
+                                        >
+                                            <View style={styles.epstxt}>
+                                                <Text style={styles.namee}>{item.name}</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>) :
+                                    (<View >
+                                        <TouchableOpacity
+                                            onPress={() => this.props.navigation.navigate('')}
+                                        >
+                                            <View style={styles.epstxtt}>
+                                                <Text style={styles.namee}>{item.name}</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </View>)
+                                }
                             </View>
-
-                        )}
-
-                    />
+                        } />
                 </View>
 
                 <Content />
@@ -134,7 +147,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 5,
-        backgroundColor: '#f9defa',
+        backgroundColor: '#d9d6ce',
+        marginTop: 20,
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    epstxtt: {
+        // padding: 30,
+        margin: 18,
+        width: 100,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 5,
+        backgroundColor: '#78fa64',
         marginTop: 20,
         fontSize: 20,
         fontWeight: 'bold'

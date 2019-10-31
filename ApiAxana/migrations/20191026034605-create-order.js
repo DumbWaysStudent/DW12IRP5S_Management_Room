@@ -29,7 +29,7 @@ module.exports = {
         onDelete: 'cascade'
       },
       duration: {
-        type: Sequelize.TIME
+        type: Sequelize.INTEGER
       },
       order_time: {
         type: Sequelize.TIME

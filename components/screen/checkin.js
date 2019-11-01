@@ -1,21 +1,6 @@
 import React, { Component } from 'react';
-import {
-    Container,
-    Content,
-    View,
-    Text,
-    Item,
-    Input,
-    Button,
-    Header,
-    Body,
-    Title,
-    Row,
-    Icon,
-
-}
-    from 'native-base';
-import { StyleSheet, FlatList, Picker, TouchableOpacity, ScrollView, Dimensions, Image } from 'react-native'
+import { Container, Content, View, Text, Item, Input, Button, Row, Icon, } from 'native-base';
+import { StyleSheet, FlatList, Picker, TouchableOpacity } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage'
 import Modal from 'react-native-modalbox';
@@ -37,7 +22,7 @@ class Checkin extends Component {
             durationCO: 0,
             customerId: null,
             customer: '',
-            orderId: null
+            orderId: null,
         }
     }
 
@@ -210,7 +195,7 @@ class Checkin extends Component {
                                     })}
                                 </Picker>
                             </View>
-                            <Text style={styles.label}>Duration (minutes)</Text>
+                            <Text style={styles.label}>Duration</Text>
                             <TextInput
                                 keyboardType="numeric"
                                 value={this.state.duration}
@@ -257,7 +242,7 @@ class Checkin extends Component {
                                 editable={false}
                                 style={styles.TextInput}
                             />
-                            <Text style={styles.label}>Duration (minutes)</Text>
+                            <Text style={styles.label}>Duration</Text>
                             <TextInput
                                 value={this.state.durationCO.toString()}
                                 editable={false}
@@ -356,9 +341,9 @@ const styles = StyleSheet.create({
 
     epstxt: {
         // padding: 30,
-        margin: 18,
-        width: 100,
-        height: 100,
+        margin: 10,
+        width: 117,
+        height: 120,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 5,
@@ -369,9 +354,9 @@ const styles = StyleSheet.create({
     },
     epstxtt: {
         // padding: 30,
-        margin: 18,
-        width: 100,
-        height: 100,
+        margin: 10,
+        width: 117,
+        height: 120,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 5,

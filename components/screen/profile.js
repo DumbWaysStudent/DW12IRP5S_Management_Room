@@ -56,7 +56,7 @@ class Profile extends Component {
                 <Image style={styles.avatar} source={{ uri: 'https://static-cdn.jtvnw.net/jtv_user_pictures/pink_screen-profile_image-727b3760759153ce-300x300.jpeg' }} />
                 <View style={styles.body}>
                     <View style={styles.bodyContent}>
-                        <Text style={styles.name}>AMBACANG</Text>
+                        <Text style={styles.name}>MANGANTUK</Text>
                         <Text style={styles.info}>Administrator</Text>
                         <TouchableOpacity style={styles.buttonContainer} onPress={() => this.logout()}>
                             <Text>Logout</Text>

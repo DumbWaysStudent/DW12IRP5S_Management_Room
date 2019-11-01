@@ -223,14 +223,14 @@ const styles = StyleSheet.create({
 
     epstxt: {
         // padding: 30,
-        margin: 18,
-        width: 100,
-        height: 100,
+        margin: 10,
+        width: 117,
+        height: 120,
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 5,
         backgroundColor: '#f9defa',
-        marginTop: 20,
+        marginTop: 15,
         fontSize: 20,
         fontWeight: 'bold'
     },

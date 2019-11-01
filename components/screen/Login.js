@@ -98,11 +98,11 @@ export default class Login extends Component {
       <Container>
         <View style={styles.Theme}>
           <View style={styles.title}>
-            <Text style={styles.login}>AMBACANG</Text>
-            <Text style={styles.loginn}>Ambacang To Live Word</Text>
+            <Text style={styles.login}>MANGANTUK</Text>
+            <Text style={styles.loginn}>Choose a bed that is passionate</Text>
           </View>
           <View style={styles.container}>
-            <Text style={styles.Textadmin}>Login Administrator</Text>
+            <Text style={styles.Textadmin}>Administrator Login</Text>
             <View>
               {/* <View style={styles.formes}> */}
               <Form style={styles.formes}>
@@ -127,12 +127,15 @@ export default class Login extends Component {
                   <Text >LOG IN</Text>
                 </Button>
               </Form>
+
             </View>
+
           </View>
+
         </View>
         {/* </View> */}
 
-      </Container>
+      </Container >
     )
   }
 }
@@ -142,10 +145,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 90,
     marginBottom: 150,
-    fontFamily: 'Georgia'
+    fontFamily: 'Georgia',
+
   },
   Theme: {
     backgroundColor: '#f3b5f5',
+
   },
   Textadmin: {
     marginBottom: 20,
@@ -155,7 +160,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Lora'
   },
   login: {
-    fontSize: 35,
+    fontSize: 40,
     color: "#696969",
     marginBottom: 10
   },
@@ -172,6 +177,7 @@ const styles = StyleSheet.create({
     borderTopStartRadius: 60,
     borderTopRightRadius: 60,
     backgroundColor: '#fffcfc',
+
   },
   formes: {
     marginTop: 20,

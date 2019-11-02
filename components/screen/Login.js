@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import { Container, Content, View, Text, Form, Item, Input, Button, Icon } from 'native-base';
-import { StyleSheet, Dimensions } from 'react-native'
+import { View, Text } from 'native-base';
+import { StyleSheet, Dimensions, ActivityIndicator, StatusBar, TextInput, TouchableOpacity } from 'react-native'
 import axios from 'axios'
 import AsyncStorage from '@react-native-community/async-storage'
 import { ip } from '../ip'
 
-const hight = Dimensions.get('window').height
+// const hight = Dimensions.get('window').height
 export default class Login extends Component {
   constructor() {
     super();
     this.state = {
-      icon: "eye-off",
       pass: true,
       isDisabled: true,
       username: "",
       password: null,
       token: "",
-      id: null
+      id: null,
+      isLoading: false
 
     }
   }
@@ -46,14 +46,6 @@ export default class Login extends Component {
         alert('Login failed!')
       }
     })
-  }
-
-
-  changeIcon = () => {
-    this.setState(prevState => ({
-      icon: prevState.icon === 'eye' ? 'eye-off' : 'eye',
-      pass: !prevState.pass
-    }))
   }
 
   userValidation = (username) => {
@@ -95,99 +87,114 @@ export default class Login extends Component {
 
   render() {
     return (
-      <Container>
-        <View style={styles.Theme}>
-          <View style={styles.title}>
-            <Text style={styles.login}>MANGANTUK</Text>
-            <Text style={styles.loginn}>Choose a bed that is passionate</Text>
-          </View>
-          <View style={styles.container}>
-            <Text style={styles.Textadmin}>Administrator Login</Text>
-            <View>
-              {/* <View style={styles.formes}> */}
-              <Form style={styles.formes}>
-                <Text style={styles.label}>Username</Text>
-                <Item rounded style={{ backgroundColor: 'white' }}>
-                  <Icon active name='home' />
-                  <Input placeholder="Username" onChangeText={username => this.userValidation(username)}
-                    keyboardType="Email" />
-                </Item>
-                <Text style={styles.labels}>Password</Text>
-                <Item rounded style={{ backgroundColor: 'white' }}>
-                  <Icon active name='lock' />
-                  <Input placeholder="Password" secureTextEntry={this.state.pass} onChangeText={password => this.passValidation(password)} />
-                  <Icon name={this.state.icon} onPress={() => this.changeIcon()} />
-                </Item>
+      <View style={styles.container}>
+        <StatusBar backgroundColor="#f3b5f5" barStyle="light-content" />
+        <View style={styles.top}>
+          <Text style={styles.title}>SNOHOY</Text>
+          <Text style={styles.sub}>Room management App</Text>
+        </View>
 
-
-                <Button
-                  dark disabled={this.state.isDisabled} rounded block style={styles.button}
-                  onPress={() => this.userLogin()}
-                >
-                  <Text >LOG IN</Text>
-                </Button>
-              </Form>
+        <View style={styles.bottom}>
+          <View style={styles.formGroup}>
+            <Text style={styles.lable}>Email</Text>
+            <View style={styles.inputBox}>
+              <TextInput
+                style={styles.input}
+                autoCapitalize="none"
+                placeholder="Email"
+                onChangeText={username => this.userValidation(username)}
+              />
 
             </View>
-
           </View>
-
+          <View style={styles.formGroup}>
+            <Text style={styles.lable}>Password</Text>
+            <View style={styles.inputBox}>
+              <TextInput
+                style={styles.input}
+                autoCapitalize="none"
+                placeholder="password"
+                onChangeText={password => this.passValidation(password)}
+                secureTextEntry={true}
+              />
+            </View>
+          </View>
+          {this.state.isLoading === true ? (
+            <ActivityIndicator size="large" />
+          ) : (
+              <TouchableOpacity style={styles.btn} onPress={() => this.userLogin()}>
+                <Text style={styles.btnText}>Login</Text>
+              </TouchableOpacity>
+            )}
         </View>
-        {/* </View> */}
+      </View>
 
-      </Container >
+
     )
   }
 }
 
 const styles = StyleSheet.create({
-  title: {
-    alignItems: "center",
-    marginTop: 90,
-    marginBottom: 150,
-    fontFamily: 'Georgia',
-
-  },
-  Theme: {
-    backgroundColor: '#f3b5f5',
-
-  },
-  Textadmin: {
-    marginBottom: 20,
-    marginTop: 50,
-    marginHorizontal: 70,
-    fontSize: 20,
-    fontFamily: 'Lora'
-  },
-  login: {
-    fontSize: 40,
-    color: "#696969",
-    marginBottom: 10
-  },
-  loginn: {
-    fontSize: 12,
-    color: "#696969"
-  },
-  labels: {
-    marginTop: 20,
-    fontWeight: 'bold'
-  },
   container: {
-    paddingHorizontal: 30,
-    borderTopStartRadius: 60,
-    borderTopRightRadius: 60,
-    backgroundColor: '#fffcfc',
+    flex: 1,
+    backgroundColor: "#f3b5f5"
+  },
+  top: {
+    flex: 1,
+    paddingHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  title: {
+    fontSize: 33,
+    letterSpacing: 5.6,
+    textTransform: 'uppercase',
+    fontFamily: 'Lato',
+    color: "white"
+  },
+  sub: {
+    fontSize: 16,
+    color: "#696969",
+    justifyContent: 'center',
+    textAlign: 'center'
+  },
 
+  bottom: {
+    minHeight: '45%',
+    backgroundColor: "white",
+    justifyContent: 'center',
+    borderTopRightRadius: 30,
+    borderTopLeftRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 20,
   },
-  formes: {
-    marginTop: 20,
-    height: hight
+  formGroup: {
+    marginVertical: 13
   },
-  label: {
-    padding: 5,
-    fontWeight: 'bold'
+  lable: {
+    fontSize: 15,
+    fontFamily: 'Lato',
   },
-  button: {
-    marginTop: 30,
+  inputBox: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#696969"
   },
+  input: {
+    paddingVertical: 10,
+    fontSize: 15,
+  },
+
+  btn: {
+    marginTop: 10,
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "black",
+    paddingVertical: 15
+  },
+  btnText: {
+    fontSize: 15,
+    textTransform: 'uppercase',
+    color: "white"
+  }
 })

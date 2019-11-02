@@ -1,1 +1,1 @@
-export const ip = `http://192.168.43.135:5000/api/v1`
+export const ip = `http://192.168.1.16:5000/api/v1`

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, FlatList, Text, TouchableOpacity } from 'react-native';
-import { Container, Content, View, Row, Item, Input, Button, Fab, Icon } from 'native-base';
+import { StyleSheet, StatusBar, FlatList, Text, TouchableOpacity } from 'react-native';
+import { Container, Content, View, Row, Header, Body, Title, Item, Input, Button, Fab, Icon } from 'native-base';
 import Modal from 'react-native-modalbox';
 import { TextInput } from 'react-native-gesture-handler';
 import axios from 'axios'
@@ -98,6 +98,12 @@ class Detail extends Component {
     render() {
         return (
             <Container>
+                <StatusBar backgroundColor="#f3b5f5" barStyle="light-content" />
+                <Header style={{ backgroundColor: "#f3b5f5" }}>
+                    <Body style={{ alignItems: 'center' }}>
+                        <Title style={{ color: 'white', letterSpacing: 5.0, }}>ROOM</Title>
+                    </Body>
+                </Header>
                 <Content>
                     <View>
                         <FlatList
@@ -228,9 +234,9 @@ const styles = StyleSheet.create({
         height: 120,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 5,
+        borderRadius: 10,
         backgroundColor: '#f9defa',
-        marginTop: 15,
+        marginTop: 20,
         fontSize: 20,
         fontWeight: 'bold'
     },
@@ -244,7 +250,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f3b5f5',
         height: 200,
         width: 300,
-        borderRadius: 20
+        borderRadius: 5
     },
     Cancel: {
         marginHorizontal: 5,

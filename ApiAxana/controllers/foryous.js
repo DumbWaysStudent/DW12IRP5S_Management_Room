@@ -31,6 +31,7 @@ exports.edit = (req, res) => {
 
     room.update(
         {
+
             name: req.body.name
         },
         {
@@ -144,9 +145,12 @@ exports.editorder = (req, res) => {
 
     order.update(
         {
+            room_id: req.body.room_id,
             customer_id: req.body.customer_id,
             is_done: true,
-            is_booked: false
+            is_booked: false,
+            duration: req.body.duration,
+            order_time: moment().add(req.body.duartion, 'minutes')
         },
         {
             where: { room_id: id },

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { Container, Content, Footer, FooterTab, Icon, Text, View, Button, Card, CardItem } from 'native-base';
+import { StyleSheet, Image, StatusBar, TouchableOpacity } from 'react-native';
+import { Text, View } from 'native-base';
 import { connect } from 'react-redux'
 import * as act from '../_actions/users'
 import AsyncStorage from '@react-native-community/async-storage';
@@ -52,14 +52,15 @@ class Profile extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <StatusBar backgroundColor="#f3b5f5" barStyle="light-content" />
                 <View style={styles.header}></View>
                 <Image style={styles.avatar} source={{ uri: 'https://static-cdn.jtvnw.net/jtv_user_pictures/pink_screen-profile_image-727b3760759153ce-300x300.jpeg' }} />
                 <View style={styles.body}>
                     <View style={styles.bodyContent}>
-                        <Text style={styles.name}>MANGANTUK</Text>
-                        <Text style={styles.info}>Administrator</Text>
+                        <Text style={styles.name}>SNOHOY</Text>
+                        <Text style={styles.info}>putra@gmail.com</Text>
                         <TouchableOpacity style={styles.buttonContainer} onPress={() => this.logout()}>
-                            <Text>Logout</Text>
+                            <Text style={{ color: 'white' }}>Logout</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 28,
-        color: "#696969",
+        color: "black",
         fontWeight: "600",
         fontFamily: 'Lato'
     },
@@ -140,8 +141,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 20,
-        width: 250,
+        width: 200,
         borderRadius: 30,
-        backgroundColor: "#f3b5f5",
+        backgroundColor: "black",
     },
 });

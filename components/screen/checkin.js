@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Content, View, Text, Item, Input, Button, Row, Icon, } from 'native-base';
-import { StyleSheet, FlatList, Picker, TouchableOpacity } from 'react-native'
+import { Container, Content, View, Text, Header, Body, Title, Item, Input, Button, Row, Icon, } from 'native-base';
+import { StyleSheet, FlatList, StatusBar, Picker, TouchableOpacity } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage'
 import Modal from 'react-native-modalbox';
@@ -122,6 +122,12 @@ class Checkin extends Component {
     render() {
         return (
             <Container>
+                <StatusBar backgroundColor="#f3b5f5" barStyle="light-content" />
+                <Header style={{ backgroundColor: "#f3b5f5" }}>
+                    <Body style={{ alignItems: 'center' }}>
+                        <Title style={{ color: 'white', letterSpacing: 5.0, }}>CHECKIN</Title>
+                    </Body>
+                </Header>
                 <View>
                     <FlatList
                         data={this.props.order.order}
@@ -350,6 +356,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#d9d6ce',
         marginTop: 20,
         fontSize: 20,
+        borderRadius: 10,
         fontWeight: 'bold'
     },
     epstxtt: {
@@ -359,7 +366,7 @@ const styles = StyleSheet.create({
         height: 120,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 5,
+        borderRadius: 10,
         backgroundColor: '#78fa64',
         marginTop: 20,
         fontSize: 20,

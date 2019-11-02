@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, FlatList, Text, TouchableOpacity } from 'react-native';
-import { Container, Content, View, Row, Fab, List, ListItem, Icon, Item, Input, Button } from 'native-base';
+import { StyleSheet, Image, FlatList, StatusBar, Text, TouchableOpacity } from 'react-native';
+import { Container, Content, View, Row, Header, Body, Title, Fab, List, ListItem, Icon, Item, Input, Button } from 'native-base';
 import { ip } from '../ip'
 import axios from 'axios'
 import Modal from 'react-native-modalbox'
@@ -113,6 +113,12 @@ class customer extends Component {
     render() {
         return (
             <Container>
+                <StatusBar backgroundColor="#f3b5f5" barStyle="light-content" />
+                <Header style={{ backgroundColor: "#f3b5f5" }}>
+                    <Body style={{ alignItems: 'center' }}>
+                        <Title style={{ color: 'white', letterSpacing: 5.0, }}>CUSTOMERS</Title>
+                    </Body>
+                </Header>
                 <View>
                     <FlatList
                         data={this.props.customer.customer}
@@ -139,19 +145,18 @@ class customer extends Component {
 
                     />
                 </View>
-
                 <Content />
-                <View >
-                    <Fab
-                        active={this.state.active}
-                        direction="up"
-                        containerStyle={{}}
-                        style={{ backgroundColor: '#e171f0' }}
-                        position="bottomRight"
-                        onPress={() => this.refs.AddCustomer.open()}>
-                        <Icon type="FontAwesome" name="plus" />
-                    </Fab>
-                </View>
+
+                <Fab
+                    active={this.state.active}
+                    direction="up"
+                    containerStyle={{}}
+                    style={{ backgroundColor: '#e171f0' }}
+                    position="bottomRight"
+                    onPress={() => this.refs.AddCustomer.open()}>
+                    <Icon type="FontAwesome" name="plus" />
+                </Fab>
+
                 <Modal
                     style={styles.modal}
                     position={"center"}
@@ -281,7 +286,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         fontWeight: 'bold',
         marginBottom: 5,
-        color: "#696969",
+        color: "black",
     },
     idCustomer: {
         marginHorizontal: 10,
@@ -301,7 +306,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f3b5f5',
         height: 320,
         width: 300,
-        borderRadius: 15
+        borderRadius: 5
     },
     Insert: {
         marginHorizontal: 5,

@@ -34,19 +34,7 @@ const RoomStack = createStackNavigator(
     Detail: {
       screen: Detail,
       title: 'Room',
-      navigationOptions: () => ({
-        title: "ROOM",
-        headerStyle: {
-          backgroundColor: '#f3b5f5'
-        },
-        headerTintColor: 'white',
-        headerTitleStyles: {
-          fontWeight: 'bold',
-          fontSize: 22,
-          fontFamily: 'Roboto',
-        },
-
-      })
+      navigationOptions: { header: null },
     },
   },
   {
@@ -59,19 +47,7 @@ const CheckinStack = createStackNavigator(
     checkin: {
       screen: checkin,
       title: 'Check In',
-      navigationOptions: () => ({
-        title: "CHECKIN",
-        headerStyle: {
-          backgroundColor: '#f3b5f5'
-        },
-        headerTintColor: 'white',
-        headerTitleStyles: {
-          fontWeight: 'bold',
-          fontSize: 22,
-          fontFamily: 'Roboto',
-        },
-
-      })
+      navigationOptions: { header: null },
     },
 
   },
@@ -98,19 +74,7 @@ const CustomerStack = createStackNavigator(
     customer: {
       screen: customer,
       title: 'Customer',
-      navigationOptions: () => ({
-        title: "CUSTOMER",
-        headerStyle: {
-          backgroundColor: '#f3b5f5'
-        },
-        headerTintColor: 'white',
-        headerTitleStyles: {
-          fontWeight: 'bold',
-          fontSize: 22,
-          fontFamily: 'Lora'
-        },
-
-      })
+      navigationOptions: { header: null },
     },
   },
   {

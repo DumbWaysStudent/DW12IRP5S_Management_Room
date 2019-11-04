@@ -9,7 +9,7 @@ Snohoy is a mobile app for Hotel admin. Admin can easily manage customers data, 
 
 <p align="center">
   <img src="./gambar1.JPG" width="800"/>
-  <img src="./gambar2.JPG" width="8"/>
+  <img src="./gambar2.JPG" width="800"/>
 </p>
 
 ## Features

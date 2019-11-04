@@ -100,7 +100,7 @@ class Checkin extends Component {
             this.refs.modalCheckout.close()
             this.setState({
                 durationCO: 0
-            })
+              })
             this.showOrder()
         })
     }
@@ -128,6 +128,7 @@ class Checkin extends Component {
                         <Title style={{ color: 'white', letterSpacing: 5.0, }}>CHECKIN</Title>
                     </Body>
                 </Header>
+                <Content>
                 <View>
                     <FlatList
                         data={this.props.order.order}
@@ -135,25 +136,26 @@ class Checkin extends Component {
                         numColumns={3}
                         renderItem={({ item }) =>
                             <View >
-                                {item.custom.length > 0 ?
+                                {item.customers.length > 0 ?
                                     (<View >
+                                        <Row>
                                         <TouchableOpacity
-                                            onPress={() => this.handleModalCheckout(item.name, item.id, item.custom[0].name, item.custom[0].id, item.custom[0].roomed.id, item.custom[0].roomed.duration)}
+                                            onPress={() => this.handleModalCheckout(item.name, item.id, item.customers[0].name, item.customers[0].id, item.customers[0].order.room_id, item.customers[0].order.duration)}
                                         >
                                             <View style={styles.epstxt}>
                                                 <Text style={styles.namee}>{item.name}</Text>
                                                 <CountDown
-                                                    until={(item.custom[0].roomed.duration)}
+                                                    until={(item.customers[0].order.duration)*60}
                                                     size={10}
                                                     digitStyle={styles.DurationStyle}
                                                     timeToShow={['M', 'S']}
                                                     timeLabels={{}}
-                                                    onFinish={() => this.checkoutTimer(item.custom[0].roomed.room_id)}
+                                                    onFinish={() => this.checkoutTimer(item.customers[0].order.room_id)}
                                                 />
                                             </View>
 
                                         </TouchableOpacity>
-
+                                        </Row>
                                     </View>) :
                                     (<View >
                                         <TouchableOpacity
@@ -168,8 +170,7 @@ class Checkin extends Component {
                             </View>
                         } />
                 </View>
-
-                <Content />
+                </Content>
                 <Modal
                     style={styles.modal}
                     position={"center"}
@@ -309,7 +310,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#f3b5f5',
         height: 400,
         width: 300,
-        borderRadius: 20
+        borderRadius: 10
     },
     ButtonCancel: {
         marginTop: 10,
@@ -367,7 +368,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        backgroundColor: '#78fa64',
+        backgroundColor: '#e882d7',
         marginTop: 20,
         fontSize: 20,
         fontWeight: 'bold'

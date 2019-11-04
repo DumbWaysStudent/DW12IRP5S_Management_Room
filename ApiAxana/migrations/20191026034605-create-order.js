@@ -6,51 +6,51 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       room_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'rooms',
-          key: 'id'
+          key: 'id',
         },
         onUpdate: 'cascade',
-        onDelete: 'cascade'
+        onDelete: 'cascade',
       },
       customer_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: 'customers',
-          key: 'id'
+          key: 'id',
         },
         onUpdate: 'cascade',
-        onDelete: 'cascade'
+        onDelete: 'cascade',
       },
       duration: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       order_time: {
-        type: Sequelize.TIME
+        type: Sequelize.TIME,
       },
       is_done: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       is_booked: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('orders');
-  }
+  },
 };

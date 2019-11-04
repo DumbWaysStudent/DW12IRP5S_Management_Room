@@ -1,5 +1,5 @@
 const models = require('../models');
-const moment = require('moment');
+// const moment = require('moment');
 const customer = models.customer;
 const order = models.order;
 const room = models.room;
@@ -117,7 +117,7 @@ exports.addcheckin = (req, res) => {
     room_id: req.body.room_id,
     customer_id: req.body.customer_id,
     duration: req.body.duration,
-    order_time: moment().add(req.body.duration, 'minutes'),
+    order_time: req.body.order_time,
     is_done: false,
     is_booked: true,
   });
@@ -149,7 +149,7 @@ exports.editorder = (req, res) => {
         is_done: true,
         is_booked: false,
         duration: req.body.duration,
-        order_end_time: moment().add(req.body.duration, 'minutes'),
+        order_end_time: req.body.duration,
       },
       {
         where: {room_id: req.params.id},

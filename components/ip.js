@@ -1,1 +1,1 @@
-export const ip = `http://192.168.1.16:5000/api/v1`
+export const ip = `https://snohoy-api.herokuapp.com/api/v1/`;

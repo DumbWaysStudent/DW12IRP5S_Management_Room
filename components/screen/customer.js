@@ -119,6 +119,7 @@ class customer extends Component {
                         <Title style={{ color: 'white', letterSpacing: 5.0, }}>CUSTOMERS</Title>
                     </Body>
                 </Header>
+                <Content>
                 <View>
                     <FlatList
                         data={this.props.customer.customer}
@@ -128,11 +129,12 @@ class customer extends Component {
                         renderItem={({ item }) => (
                             <View style={styles.conView}>
                                 <ListItem>
-                                    <Row style={{ marginTop: 5 }}>
+                                <Row >
                                         <TouchableOpacity
                                             onPress={() => this.handleModalEdit(item.id, item.name, item.identity_card, item.phone_number)}>
                                             <Image style={styles.conImg} source={require('./profile.png')} />
                                         </TouchableOpacity>
+      
                                         <View style={styles.conval}>
                                             <Text style={styles.nameCustomer} >{item.name}</Text>
                                             <Text style={styles.idCustomer} >{item.identity_card}</Text>
@@ -144,9 +146,8 @@ class customer extends Component {
                         )}
 
                     />
-                </View>
-                <Content />
-
+                    </View>
+                    </Content>
                 <Fab
                     active={this.state.active}
                     direction="up"
@@ -156,7 +157,7 @@ class customer extends Component {
                     onPress={() => this.refs.AddCustomer.open()}>
                     <Icon type="FontAwesome" name="plus" />
                 </Fab>
-
+               
                 <Modal
                     style={styles.modal}
                     position={"center"}
@@ -299,6 +300,7 @@ const styles = StyleSheet.create({
     conView: {
         // margin: 50,
         marginBottom: 5,
+        marginRight : 5
     },
     modal: {
         justifyContent: 'center',

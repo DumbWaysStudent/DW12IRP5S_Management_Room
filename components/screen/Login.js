@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
-import { View, Text } from 'native-base';
-import { StyleSheet, Dimensions, ActivityIndicator, StatusBar, TextInput, TouchableOpacity } from 'react-native'
-import axios from 'axios'
-import AsyncStorage from '@react-native-community/async-storage'
-import { ip } from '../ip'
+import React, {Component} from 'react';
+import {View, Text} from 'native-base';
+import {
+  StyleSheet,
+  Dimensions,
+  ActivityIndicator,
+  StatusBar,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
+import {ip} from '../ip';
 
 // const hight = Dimensions.get('window').height
 export default class Login extends Component {
@@ -12,13 +19,12 @@ export default class Login extends Component {
     this.state = {
       pass: true,
       isDisabled: true,
-      username: "",
+      username: '',
       password: null,
-      token: "",
+      token: '',
       id: null,
-      isLoading: false
-
-    }
+      isLoading: false,
+    };
   }
 
   userLogin = () => {
@@ -27,63 +33,59 @@ export default class Login extends Component {
       url: `${ip}/login`,
       data: {
         email: this.state.username,
-        password: this.state.password
-      }
+        password: this.state.password,
+      },
     }).then(res => {
-
       this.setState({
         token: res.data.token,
-        id: res.data.user.id
-      })
-
-
+        id: res.data.user.id,
+      });
 
       if (typeof res.data.token !== 'undefined') {
-        AsyncStorage.setItem('token', this.state.token)
-        AsyncStorage.setItem('id', JSON.stringify(this.state.id))
-        this.props.navigation.navigate('Detail')
+        AsyncStorage.setItem('token', this.state.token);
+        AsyncStorage.setItem('id', JSON.stringify(this.state.id));
+        this.props.navigation.navigate('Detail');
       } else {
-        alert('Login failed!')
+        alert('Login failed!');
       }
-    })
-  }
+    });
+  };
 
-  userValidation = (username) => {
-    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  userValidation = username => {
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (reg.test(username) == true && this.state.password != null) {
       this.setState({
         username,
         isDisabled: false,
-      })
+      });
     } else {
       this.setState({
         username,
-        isDisabled: true
-      })
+        isDisabled: true,
+      });
     }
     this.setState({
       username,
-    })
-  }
+    });
+  };
 
-  passValidation = (password) => {
-    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+  passValidation = password => {
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (password != null && reg.test(this.state.username) == true) {
       this.setState({
         password,
         isDisabled: false,
-      })
+      });
     } else {
       this.setState({
         password,
-        isDisabled: true
-      })
+        isDisabled: true,
+      });
     }
     this.setState({
-      password
-    })
-  }
-
+      password,
+    });
+  };
 
   render() {
     return (
@@ -104,7 +106,6 @@ export default class Login extends Component {
                 placeholder="Email"
                 onChangeText={username => this.userValidation(username)}
               />
-
             </View>
           </View>
           <View style={styles.formGroup}>
@@ -122,46 +123,46 @@ export default class Login extends Component {
           {this.state.isLoading === true ? (
             <ActivityIndicator size="large" />
           ) : (
-              <TouchableOpacity style={styles.btn} onPress={() => this.userLogin()}>
-                <Text style={styles.btnText}>Login</Text>
-              </TouchableOpacity>
-            )}
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => this.userLogin()}>
+              <Text style={styles.btnText}>Login</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
-
-
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f3b5f5"
+    backgroundColor: '#f3b5f5',
   },
   top: {
     flex: 1,
     paddingHorizontal: 20,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     fontSize: 33,
     letterSpacing: 5.6,
     textTransform: 'uppercase',
     fontFamily: 'Lato',
-    color: "white"
+    color: 'white',
   },
   sub: {
     fontSize: 16,
-    color: "#696969",
+    color: '#696969',
     justifyContent: 'center',
-    textAlign: 'center'
+    textAlign: 'center',
   },
 
   bottom: {
     minHeight: '45%',
-    backgroundColor: "white",
+    backgroundColor: 'white',
     justifyContent: 'center',
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   formGroup: {
-    marginVertical: 13
+    marginVertical: 13,
   },
   lable: {
     fontSize: 15,
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
   },
   inputBox: {
     borderBottomWidth: 1,
-    borderBottomColor: "#696969"
+    borderBottomColor: '#696969',
   },
   input: {
     paddingVertical: 10,
@@ -189,12 +190,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: "black",
-    paddingVertical: 15
+    backgroundColor: 'black',
+    paddingVertical: 15,
   },
   btnText: {
     fontSize: 15,
     textTransform: 'uppercase',
-    color: "white"
-  }
-})
+    color: 'white',
+  },
+});

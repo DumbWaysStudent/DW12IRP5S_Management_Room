@@ -23,7 +23,6 @@ class Detail extends Component {
     }
     async componentDidMount() {
         await this.getToken()
-        // await this.getId()
         this.showRoom()
         this.focusListener = this.props.navigation.addListener('didFocus', () => {
             this.showRoom()
@@ -38,19 +37,10 @@ class Detail extends Component {
         })
     }
 
-
-    // async getId() {
-    //     await AsyncStorage.getItem('id').then(key =>
-    //         this.setState({
-    //             id: JSON.parse(key)
-    //         }))
-    // }
-
     showRoom = () => {
         this.props.getRoom(token = this.state.token)
 
     }
-
 
     addroom = () => {
         axios({
@@ -235,7 +225,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        backgroundColor: '#f9defa',
+        backgroundColor: '#fac2fc',
         marginTop: 20,
         fontSize: 20,
         fontWeight: 'bold'

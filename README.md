@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="./logo.png" width="250"/><br>
+  <img src="./logo.png" width="310"/><br>
 </h1>
 
 ## Snohoy

@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="./logo.png" width="300"/><br>
+  <img src="./logo.png" width="250"/><br>
 </h1>
 
 ## Snohoy
@@ -8,8 +8,8 @@ Nyenyak is a mobile app for Hotel admin. Admin can easily manage customers data,
 ## Screenshots
 
 <p align="center">
-  <img src="./gambar1.jpg" width="600"/>
-  <img src="./gambar2.jpg" width="600"/>
+  <img src="./gambar1.JPG" width="600"/>
+  <img src="./gambar2.JPG" width="600"/>
 </p>
 
 ## Features

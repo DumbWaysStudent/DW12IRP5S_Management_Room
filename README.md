@@ -3,13 +3,13 @@
 </h1>
 
 ## Snohoy
-Nyenyak is a mobile app for Hotel admin. Admin can easily manage customers data, rooms data, and check in & check out activity.
+Snohoy is a mobile app for Hotel admin. Admin can easily manage customers data, rooms data, and check in & check out activity.
 
 ## Screenshots
 
 <p align="center">
-  <img src="./gambar1.JPG" width="600"/>
-  <img src="./gambar2.JPG" width="600"/>
+  <img src="./gambar1.JPG" width="800"/>
+  <img src="./gambar2.JPG" width="8"/>
 </p>
 
 ## Features
